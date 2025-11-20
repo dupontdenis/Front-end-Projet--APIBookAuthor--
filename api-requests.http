@@ -1,0 +1,148 @@
+# API BookAuthor - REST Client requests
+#
+# Usage notes:
+# - Start MongoDB and run `node app.js` in the project root.
+# - Use the REST Client extension (or similar) to run the requests in this file.
+# - Replace {{AUTHOR_ID}} and {{BOOK_ID}} placeholders with actual IDs returned by the API.
+
+
+### Seeded data
+
+The `npm run seed` script inserts three authors into the database:
+- Jane Austen
+- George Orwell
+- J.K. Rowling
+
+After running the seeder, get the actual object IDs (you'll need them for book creation):
+
+GET http://localhost:3000/authors
+
+Copy the `_id` value for the author you want to reference and use it in the requests below. Example placeholders used:
+- `{{JANE_AUSTEN_ID}}`, `{{GEORGE_ORWELL_ID}}`, `{{JK_ROWLING_ID}}`
+
+### Example: create a book using a seeded author (replace placeholder)
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "Pride and Prejudice (Seeded)",
+  "authors": ["{{JANE_AUSTEN_ID}}"]
+}
+
+### Example: create a book with multiple seeded authors
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "Collected Works (Seeded)",
+  "authors": ["{{GEORGE_ORWELL_ID}}", "{{JANE_AUSTEN_ID}}"]
+}
+
+
+### Create an author
+POST http://localhost:3000/authors
+Content-Type: application/json
+
+{
+  "name": "Alice Example",
+  "dateOfBirth": "1985-04-12",
+  "dateOfDeath": null
+}
+
+### List authors
+GET http://localhost:3000/authors
+
+### Get an author by ID
+GET http://localhost:3000/authors/691c6314c94ea9888d7ff177
+
+### Update an author
+PUT http://localhost:3000/authors/{{AUTHOR_ID}}
+Content-Type: application/json
+
+{
+  "name": "Alice Updated",
+  "dateOfBirth": "1985-04-12",
+  "dateOfDeath": null
+}
+
+### Delete an author
+DELETE http://localhost:3000/authors/{{AUTHOR_ID}}
+
+### Create a book (use an existing author id in the authors array)
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "Example Book",
+  "authors": ["691de36e8fec4a517b9e7030"]
+}
+
+### List books (authors populated)
+GET http://localhost:3000/books
+
+### Get a book by ID
+GET http://localhost:3000/books/{{BOOK_ID}}
+
+### Update a book
+PUT http://localhost:3000/books/{{BOOK_ID}}
+Content-Type: application/json
+
+{
+  "title": "Example Book (Updated)",
+  "authors": ["{{AUTHOR_ID}}"]
+}
+
+### Delete a book
+DELETE http://localhost:3000/books/{{BOOK_ID}}
+
+### Quick Tests
+
+# Note: replace placeholders (`{{AUTHOR_ID}}`, `{{BOOK_ID}}`, or `{{JANE_AUSTEN_ID}}`) with real IDs from `GET /authors` after running `npm run seed`.
+
+### 1) List all authors (verify seeder)
+GET http://localhost:3000/authors
+
+### 2) List all books
+GET http://localhost:3000/books
+
+### 3) Get books by author (query param)
+GET http://localhost:3000/books?author={{JANE_AUSTEN_ID}}
+
+### 4) Get books by author (author sub-route)
+GET http://localhost:3000/authors/{{JANE_AUSTEN_ID}}/books
+
+### 5) Get authors for a book
+GET http://localhost:3000/books/{{BOOK_ID}}/authors
+
+### 6) Create an author (test create)
+POST http://localhost:3000/authors
+Content-Type: application/json
+
+{
+  "name": "Test Author",
+  "dateOfBirth": "1990-01-01",
+  "dateOfDeath": null
+}
+
+### 7) Create a book using an existing author
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "Test Book",
+  "authors": ["{{AUTHOR_ID}}"]
+}
+
+### 8) Update the test book (replace BOOK_ID)
+PUT http://localhost:3000/books/{{BOOK_ID}}
+Content-Type: application/json
+
+{
+  "title": "Test Book (Updated)",
+  "authors": ["{{AUTHOR_ID}}"]
+}
+
+### 9) Cleanup: delete created book and author (replace IDs)
+DELETE http://localhost:3000/books/{{BOOK_ID}}
+DELETE http://localhost:3000/authors/{{AUTHOR_ID}}
+

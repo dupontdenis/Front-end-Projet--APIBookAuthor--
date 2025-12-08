@@ -175,5 +175,4 @@ Books
 
 ---
 
-If you'd like, I can add: a) example responses for each endpoint, b) a short Postman collection, or c) auto-fill the `api-requests.http` placeholders with IDs produced by the seeder.
 

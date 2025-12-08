@@ -177,12 +177,3 @@ Books
 
 If you'd like, I can add: a) example responses for each endpoint, b) a short Postman collection, or c) auto-fill the `api-requests.http` placeholders with IDs produced by the seeder.
 
-## Frontend tester
-
-A minimal static frontend is included to quickly test the `GET /authors` and `GET /books` endpoints.
-
-- Open the app at: `http://localhost:3000/` after starting the server.
-- Click **Load Authors** to fetch `GET /authors` and show authors.
-- Click **Load Books** to fetch `GET /books` and show books (populated authors shown when available).
-
-The frontend files are in the `public/` folder: `index.html`, `main.js`, and `style.css`.

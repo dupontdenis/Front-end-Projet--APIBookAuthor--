@@ -49,11 +49,11 @@ npm run dev
 
 ## Seeded data
 
-Running `npm run seed` inserts example authors and books into the database. The seeder adds these authors:
+Running `npm run seed` inserts example authors and books into the database. The seeder adds some authors:
 
 - Jane Austen
 - George Orwell
-- J.K. Rowling
+- J.K. Rowling ...
 
 To see the seeded authors and their `_id` values:
 

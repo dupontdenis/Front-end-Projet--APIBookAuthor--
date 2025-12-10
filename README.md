@@ -1,4 +1,4 @@
-# APIBookAuthor
+8# APIBookAuthor
 
 ## Overview
 
@@ -172,10 +172,6 @@ Books
 
 - The `authors` field on a `Book` document stores ObjectId references to `Author` documents. The API returns raw references by default. If you need populated author objects, you can populate them in the controller or add a query option to return populated results.
 - The seeder will erase the `authors` and `books` collections — do not run it in production.
-
----
-
-If you'd like, I can add: a) example responses for each endpoint, b) a short Postman collection, or c) auto-fill the `api-requests.http` placeholders with IDs produced by the seeder.
 
 ## Frontend tester
 
